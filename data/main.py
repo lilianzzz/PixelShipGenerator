@@ -1,18 +1,18 @@
 import pygame
 from pygame.locals import *
-from .constants import *
+from constants import *
 from . import generator as gen
 from . import title_screen as tit
 from .ship.components.basic_hull import *
 
 
 class Main(object):
-    
+
     """ Main object for the generator. Handles input and the main loop.
     """
-    
+
     def __init__(self):
-    
+
         self.screen = pygame.display.get_surface()
         self.clock = pygame.time.Clock()
         self.end = False
@@ -66,6 +66,6 @@ class Main(object):
 
 
 def main():
-    
+
     control = Main()
     control.main()

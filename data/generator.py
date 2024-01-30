@@ -1,10 +1,10 @@
-from .constants import *
+from constants import *
 from .ship.ship import Ship
 from .state import State
 from .button import Button
 from .ship.mirror import Mirror
 import os
-
+from constants import *
 
 anim = False
 
@@ -225,13 +225,23 @@ class Generator(State):
 
     def save(self):
 
+
+        if CUSTOM_PATH is not None:
+            exports_dir = "exports"
+            exports_dir = os.path.join(CUSTOM_PATH, exports_dir)
+        else:
+            exports_dir = ".\exports"
+
+        if not os.path.exists(exports_dir):
+            os.makedirs(exports_dir)
+
         for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
-                filename = '../exports/ship%s.png' % ship.ship_id
+                # filename = '../exports/ship%s.png' % ship.ship_id
+                filename = os.path.join(exports_dir, 'ship%s.png' % ship.ship_id)
 
                 if not os.path.isfile(filename):
-
                     i, r = ship.get_image()
                     pygame.image.save(i, filename)
                     self.saved_grid[point] = True

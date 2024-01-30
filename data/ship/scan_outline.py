@@ -1,5 +1,5 @@
 from .pixel_map import PixelMap
-from ..constants import *
+from constants import *
 from random import choice
 
 

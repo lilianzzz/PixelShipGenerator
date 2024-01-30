@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 from .state import State
-from .constants import *
+from constants import *
 
 
 class TitleScreen(State):

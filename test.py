@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from data.constants import *
+from constants import *
 import data.ship.components.basic_hull as bh
 import data.ship.components.compound_components as cc
 import data.ship.components.curves as cv
@@ -28,4 +28,3 @@ while not end:
         end = True
 
 pygame.quit()
-

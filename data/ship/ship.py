@@ -1,7 +1,7 @@
 from random import *
 import time
 from data.ship.pixel_map import PixelMap
-from ..constants import *
+from constants import *
 from .frame import Frame
 from data.ship.palette import Palette
 from .mirror import Mirror, RevertBackup
@@ -10,10 +10,16 @@ from . import ship_connector as sc
 import os
 import sys
 from . import color_gen
-from data.constants import *
+from constants import *
 
 def set_ship_count():
-    pathname = os.path.join(os.pardir, 'exports')
+    if CUSTOM_PATH is not None:
+        exports_dir = "exports"
+        exports_dir = os.path.join(CUSTOM_PATH, exports_dir)
+    else:
+        exports_dir = ".\exports"
+    pathname = exports_dir
+    # pathname = os.path.join(os.pardir, 'exports')
 
     if not os.path.exists(pathname):
         print(f"Directory {pathname} does not exist.")

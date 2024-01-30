@@ -1,4 +1,4 @@
-from ...constants import *
+from constants import *
 from .component import *
 from random import *
 
