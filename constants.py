@@ -2,12 +2,12 @@ import os
 import pygame
 from pygame.locals import *
 
-CUSTOM_PATH = None #"C:\proj\PixelShipGenerator" # set to None to not use custom exports folder
+CUSTOM_PATH = None #"C:\proj\PixelShipGenerator" # set to None to not use custom exports folder (defaults to None)
 
-SCALE = 1
+SCALE = 1 # set to 1 for no scaling (defaults to 2)
 
-SHIPW = 200 * SCALE
-SHIPH = 200 * SCALE
+SHIPW = 200 * SCALE # ship width
+SHIPH = 200 * SCALE # ship width
 
 CONFORMITY = .55 # conformity is percentage of tiles per component that should be in frame(defaults to .55)
 SIZE = .15 # size is % of frame that must be filled to complete component stage(defaults to .15)
@@ -22,8 +22,8 @@ SCREENHEIGHT = 600 * SCALE + BUTTONMARGIN
 
 # GRID_W = 16
 # GRID_H = 12
-GRID_W = SCREENWIDTH // SHIPW
-GRID_H = SCREENHEIGHT // SHIPH
+GRID_W = SCREENWIDTH // SHIPW  # auto grid ships in program
+GRID_H = SCREENHEIGHT // SHIPH # auto grid ships in program
 
 SCREEN_SIZE = (SCREENWIDTH, SCREENHEIGHT)
 CAPTION = 'Pixel Ship Generator'
