@@ -13,20 +13,24 @@ from . import color_gen
 
 
 def set_ship_count():
-    pathname = os.pardir + '/exports/'
+    pathname = os.path.join(os.pardir, 'exports')
+
+    if not os.path.exists(pathname):
+        print(f"Directory {pathname} does not exist.")
+        return 0
 
     existing_pics = []
 
     for file in os.listdir(pathname):
-        fname = pathname + file
+        fname = os.path.join(pathname, file)
         if os.path.isfile(fname) and file.endswith('.png') and file.startswith('ship'):
-            num = file.rstrip('.png')
-            num = num.lstrip('ship')
+            num = file.rstrip('.png').lstrip('ship')
             try:
                 num = int(num)
                 existing_pics.append(num)
             except ValueError:
                 pass
+
     if len(existing_pics) > 0:
         return max(existing_pics) + 1
     else:
