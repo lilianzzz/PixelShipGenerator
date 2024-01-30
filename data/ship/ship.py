@@ -10,7 +10,7 @@ from . import ship_connector as sc
 import os
 import sys
 from . import color_gen
-
+from data.constants import *
 
 def set_ship_count():
     pathname = os.path.join(os.pardir, 'exports')
@@ -54,7 +54,11 @@ class Ship(PixelMap):
 
     @staticmethod
     def standard_seed():
-        return randint(0, 1000000000)
+        if SEED == None:
+            return randint(1, 1000000000)
+        else:
+            return SEED
+        # return randint(1, 1000000000)
 
     def __init__(self, xxx_todo_changeme, animating=False, grid_coord=(0, 0), sd='standard'):
 
@@ -83,9 +87,9 @@ class Ship(PixelMap):
         self.mirror, self.mirrored = self.set_initial_mirror()
 
         # conformity is percentage of tiles per component that should be in frame
-        self.conformity = .55
+        self.conformity = CONFORMITY
         # size is % of frame that must be filled to complete component stage
-        self.size = .75
+        self.size = SIZE
         self.frame_size = self.frame.size
         self.points_in_frame = 0
 
@@ -275,7 +279,7 @@ class Ship(PixelMap):
             c = self.palette.get_component(self.color_palette.get_color())
 
             self.add_component(c, animating)
-            if count > 100:
+            if count > COMPONENTS:
                 break
 
         self.fill_gaps()
@@ -328,7 +332,7 @@ class Ship(PixelMap):
                 self.animate(c)
 
             count += 1
-            if count > 20:
+            if count > PLASEMENTS:
                 return
 
             # place component

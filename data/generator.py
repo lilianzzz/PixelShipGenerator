@@ -11,8 +11,8 @@ anim = False
 
 class Generator(State):
 
-    gridw = 8
-    gridh = 6
+    gridw = GRID_W
+    gridh = GRID_H
     gridsize = gridw * gridh
     grid_list = list(range(gridsize))
 
