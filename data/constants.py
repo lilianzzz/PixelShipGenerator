@@ -34,5 +34,4 @@ def scale(n):
 
 
 def descale(n):
-    return n / SCALE
-
+    return n // SCALE

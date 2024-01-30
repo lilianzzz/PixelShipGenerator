@@ -1,4 +1,4 @@
-from component import Component
+from .component import Component
 from random import *
                 
                 
@@ -46,8 +46,9 @@ class Rect(Component):
         s = style % style_num
         return style_dict[s]()
 
-    def __init__(self, (w, h)):
+    def __init__(self, xxx_todo_changeme):
         
+        (w, h) = xxx_todo_changeme
         Component.__init__(self, (w, h))
         
     def create(self):

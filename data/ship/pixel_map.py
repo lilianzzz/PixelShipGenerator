@@ -3,8 +3,9 @@ from ..constants import *
 
 class PixelMap(object):
 
-    def __init__(self, (w, h), colorkey=False):
+    def __init__(self, xxx_todo_changeme, colorkey=False):
 
+        (w, h) = xxx_todo_changeme
         self.w = w
         self.h = h
 
@@ -52,7 +53,8 @@ class PixelMap(object):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-    def position(self, (x, y)):
+    def position(self, xxx_todo_changeme1):
+        (x, y) = xxx_todo_changeme1
         self.rect.topleft = (x, y)
 
     # for debugging
@@ -68,10 +70,11 @@ class PixelMap(object):
                 elif self.map[x][y] == -1:
                     new = ' -'
                 line += new
-            print line
+            print(line)
 
     # map functions
-    def add_point(self, (x, y), value=1):
+    def add_point(self, xxx_todo_changeme2, value=1):
+        (x, y) = xxx_todo_changeme2
         if not self.is_on_map((x, y)):
             return
         if value >= 1:
@@ -79,38 +82,44 @@ class PixelMap(object):
         elif value == -1:
             self.add_edge((x, y))
 
-    def add_pixel(self, (x, y), value=1):
+    def add_pixel(self, xxx_todo_changeme3, value=1):
 
+        (x, y) = xxx_todo_changeme3
         self.map[x][y] = value
         self.points.add((x, y))
 
-    def add_edge(self, (x, y)):
+    def add_edge(self, xxx_todo_changeme4):
 
+        (x, y) = xxx_todo_changeme4
         self.map[x][y] = -1
         self.edges.add((x, y))
 
-    def change_point(self, (x, y), value):
+    def change_point(self, xxx_todo_changeme5, value):
 
+        (x, y) = xxx_todo_changeme5
         self.trim_point((x, y))
         self.add_point((x, y), value)
 
-    def trim_point(self, (x, y)):
+    def trim_point(self, xxx_todo_changeme6):
 
+        (x, y) = xxx_todo_changeme6
         self.map[x][y] = 0
         if (x, y) in self.edges:
             self.edges.remove((x, y))
         if (x, y) in self.points:
             self.points.remove((x, y))
 
-    def is_on_map(self, (x, y)):
+    def is_on_map(self, xxx_todo_changeme7):
 
+        (x, y) = xxx_todo_changeme7
         if 0 <= x < self.w and 0 <= y < self.h:
             return True
         else:
             return False
 
-    def get_adj(self, (x, y), diag=False):
+    def get_adj(self, xxx_todo_changeme8, diag=False):
 
+        (x, y) = xxx_todo_changeme8
         raw_adj = [(x-1, y), (x+1, y), (x, y-1), (x, y+1)]
         if diag:
             raw_adj.extend([(x-1, y-1), (x+1, y-1), (x-1, y+1), (x+1, y+1)])
@@ -147,7 +156,7 @@ class PixelMap(object):
     transform is wrapper for _transform to allow overriding in child classes'''
     def transform(self, method):
         if method not in ('clockwise', 'counter_clockwise', 'ver_flip', 'hor_flip'):
-            print '***************** invalid transform keyword ********************'
+            print('***************** invalid transform keyword ********************')
             return
         self._transform(method)
 
@@ -197,7 +206,8 @@ class PixelMap(object):
         self.points = new_points
         self.edges = new_edges
 
-    def assign_new(self, (x, y), value, map, edges, points):
+    def assign_new(self, xxx_todo_changeme9, value, map, edges, points):
+        (x, y) = xxx_todo_changeme9
         map[x][y] = value
         if value == -1:
             edges.add((x, y))
@@ -235,9 +245,9 @@ class PixelMap(object):
     def get_row(self, y, rev=False):
         row = []
         if not rev:
-            r = range(self.w)
+            r = list(range(self.w))
         elif rev:
-            r = range(self.w-1, -1, -1)
+            r = list(range(self.w-1, -1, -1))
         for x in r:
             row.append((x, y))
         return row
@@ -245,9 +255,9 @@ class PixelMap(object):
     def get_col(self, x, rev=False):
         col = []
         if not rev:
-            r = range(self.w)
+            r = list(range(self.w))
         elif rev:
-            r = range(self.w-1, -1, -1)
+            r = list(range(self.w-1, -1, -1))
         for y in r:
             col.append((x, y))
         return col

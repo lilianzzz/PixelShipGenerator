@@ -1,15 +1,15 @@
 from random import *
 import time
-from pixel_map import PixelMap
+from data.ship.pixel_map import PixelMap
 from ..constants import *
-from frame import Frame
-from palette import Palette
-from mirror import Mirror, RevertBackup
-import component_placer as cp
-import ship_connector as sc
+from .frame import Frame
+from data.ship.palette import Palette
+from .mirror import Mirror, RevertBackup
+from . import component_placer as cp
+from . import ship_connector as sc
 import os
 import sys
-import color_gen
+from . import color_gen
 
 
 def set_ship_count():
@@ -52,8 +52,9 @@ class Ship(PixelMap):
     def standard_seed():
         return randint(0, 1000000000)
 
-    def __init__(self, (w, h), animating=False, grid_coord=(0, 0), sd='standard'):
+    def __init__(self, xxx_todo_changeme, animating=False, grid_coord=(0, 0), sd='standard'):
 
+        (w, h) = xxx_todo_changeme
         if sd == 'standard':
             self.seed = self.standard_seed()
         else:
@@ -95,7 +96,7 @@ class Ship(PixelMap):
     # pixel map funtions
     def transform(self, method):
         if method not in ('clockwise', 'counter_clockwise', 'ver_flip', 'hor_flip'):
-            print '***************** invalid transform keyword ********************'
+            print('***************** invalid transform keyword ********************')
             return
         self._transform(method)
         self.update_id()
@@ -105,7 +106,7 @@ class Ship(PixelMap):
 
         center_point = self.get_center()
 
-        map_center = (self.w / 2, self.h / 2)
+        map_center = (self.w // 2, self.h // 2)
 
         move_mod = (map_center[0]-center_point[0], map_center[1]-center_point[1])
         self.shift_map(move_mod)
@@ -113,8 +114,9 @@ class Ship(PixelMap):
         if update:
             self.update_image()
 
-    def shift_map(self, (mx, my)):
+    def shift_map(self, xxx_todo_changeme1):
 
+        (mx, my) = xxx_todo_changeme1
         points = self.points.copy()
         points.update(self.edges)
 
@@ -127,7 +129,7 @@ class Ship(PixelMap):
 
         self.new_map()
 
-        for (x, y), v in new_map.items():
+        for (x, y), v in list(new_map.items()):
             self.add_point((x, y), v)
 
     def get_center(self):
@@ -142,8 +144,8 @@ class Ship(PixelMap):
             tot_x += x
             tot_y += y
 
-        avg_x = tot_x / length
-        avg_y = tot_y / length
+        avg_x = tot_x // length
+        avg_y = tot_y // length
 
         if (avg_x, avg_y) in points:
             return avg_x, avg_y
@@ -357,7 +359,7 @@ class Ship(PixelMap):
                     return
 
     def frame_not_full(self):
-        ratio = self.points_in_frame / float(self.frame_size)
+        ratio = self.points_in_frame // float(self.frame_size)
 
         if ratio < self.size:
             return True
@@ -403,8 +405,9 @@ class Ship(PixelMap):
         for point in gaps:
             self.change_point(point, 1)
 
-    def point_is_gap(self, (x, y)):
+    def point_is_gap(self, xxx_todo_changeme2):
 
+        (x, y) = xxx_todo_changeme2
         adj = ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1),
                (x + 1, y + 1), (x - 1, y + 1), (x + 1, y - 1), (x - 1, y - 1))
         edges = 0

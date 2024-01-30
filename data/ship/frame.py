@@ -1,5 +1,5 @@
 from random import *
-from spine import Spine
+from .spine import Spine
 
 
 class Frame(object):
@@ -138,7 +138,7 @@ class Frame(object):
 
     @classmethod
     def rand_premade(cls, ship):
-        return cls(ship, choice(cls.layout.keys()))
+        return cls(ship, choice(list(cls.layout.keys())))
 
     @classmethod
     def preselected(cls, ship, layout):
@@ -272,8 +272,10 @@ class Zone(object):
     map.
     """
 
-    def __init__(self, (x, y), (w, h)):
+    def __init__(self, xxx_todo_changeme, xxx_todo_changeme1):
 
+        (x, y) = xxx_todo_changeme
+        (w, h) = xxx_todo_changeme1
         self.x1 = x
         self.y1 = y
         self.x2 = x + w
@@ -282,8 +284,9 @@ class Zone(object):
         self.h = h
         self.size = x * y
 
-    def is_in(self, (x, y)):
+    def is_in(self, xxx_todo_changeme2):
 
+        (x, y) = xxx_todo_changeme2
         if self.x1 <= x <= self.x2 and self.y1 <= y <= self.y2:
             return True
         else:

@@ -1,4 +1,4 @@
-from pixel_map import PixelMap
+from .pixel_map import PixelMap
 from random import choice
 
 
@@ -23,8 +23,9 @@ class ShipConnector(PixelMap):
         return chunk_dict, chunk_id
 
     @staticmethod
-    def flood_chunk(m, (x, y), dict, tag):
+    def flood_chunk(m, xxx_todo_changeme, dict, tag):
 
+        (x, y) = xxx_todo_changeme
         dict[(x, y)] = (tag, m.map[x][y])
 
         queue = [(x, y)]
@@ -68,7 +69,7 @@ class ShipConnector(PixelMap):
 
         self.chunk_dict = chunk_dict
         self.num = num
-        self.chunk_ids = range(1, num + 1)
+        self.chunk_ids = list(range(1, num + 1))
 
         self.chunks = self.get_chunks()
         self.centers = self.get_chunk_centers()
@@ -114,7 +115,7 @@ class ShipConnector(PixelMap):
     def reset_chunks(self):
 
         self.chunk_dict, self.num = self.get_chunk_dict(self)
-        self.chunk_ids = range(1, self.num + 1)
+        self.chunk_ids = list(range(1, self.num + 1))
         self.chunks = self.get_chunks()
         self.centers = self.get_chunk_centers()
 
@@ -137,8 +138,8 @@ class ShipConnector(PixelMap):
             points.add((x, y))
             tot_x += x
             tot_y += y
-        avg_x = tot_x / len(chunk)
-        avg_y = tot_y / len(chunk)
+        avg_x = tot_x // len(chunk)
+        avg_y = tot_y // len(chunk)
 
         if (avg_x, avg_y) in points:
             return avg_x, avg_y
@@ -157,7 +158,7 @@ class ShipConnector(PixelMap):
         for n in self.chunk_ids:
             chunks[n] = []
 
-        for point, (id, value) in self.chunk_dict.items():
+        for point, (id, value) in list(self.chunk_dict.items()):
             chunks[id].append((point, value))
 
         return chunks
@@ -218,8 +219,9 @@ class ShipConnector(PixelMap):
 
         return False
 
-    def move_chunk(self, (a, b), axis):
+    def move_chunk(self, xxx_todo_changeme1, axis):
 
+        (a, b) = xxx_todo_changeme1
         ax, ay = self.centers[a]
         bx, by = self.centers[b]
 

@@ -34,8 +34,9 @@ class ColorPalette(object):
             verified.append(v)
         return tuple(verified)
 
-    def vary_color(self, (r, g, b)):
+    def vary_color(self, xxx_todo_changeme):
 
+        (r, g, b) = xxx_todo_changeme
         r_var = randint(-self.variance, self.variance)
         g_var = randint(-self.variance, self.variance)
         b_var = randint(-self.variance, self.variance)
@@ -44,8 +45,9 @@ class ColorPalette(object):
 
         return self.verify_color(new)
 
-    def lighten_color(self, (r, g, b)):
+    def lighten_color(self, xxx_todo_changeme1):
 
+        (r, g, b) = xxx_todo_changeme1
         r_var = randint(0, self.variance)
         g_var = randint(0, self.variance)
         b_var = randint(0, self.variance)
@@ -54,8 +56,9 @@ class ColorPalette(object):
 
         return self.verify_color(new)
 
-    def darken_color(self, (r, g, b)):
+    def darken_color(self, xxx_todo_changeme2):
 
+        (r, g, b) = xxx_todo_changeme2
         r_var = randint(-self.variance, 0)
         g_var = randint(-self.variance, 0)
         b_var = randint(-self.variance, 0)
@@ -73,4 +76,4 @@ class ColorPalette(object):
         return r, g, b
 
     def get_color(self):
-        return choice(self.palette.keys())
+        return choice(list(self.palette.keys()))

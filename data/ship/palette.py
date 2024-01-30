@@ -1,7 +1,7 @@
-import components.basic_hull as bh
-import components.angles as an
-import components.compound_components as cc
-import components.curves as cv
+import data.ship.components.basic_hull as bh
+import data.ship.components.angles as an
+import data.ship.components.compound_components as cc
+import data.ship.components.curves as cv
 from random import *
 
 
@@ -54,4 +54,3 @@ class Palette(object):
             c_list.append(choice(Palette.special))
 
         return c_list
-

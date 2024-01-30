@@ -1,9 +1,9 @@
 import pygame
 from pygame.locals import *
-from constants import *
-import generator as gen
-import title_screen as tit
-from ship.components.basic_hull import *
+from .constants import *
+from . import generator as gen
+from . import title_screen as tit
+from .ship.components.basic_hull import *
 
 
 class Main(object):

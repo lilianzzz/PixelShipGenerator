@@ -1,5 +1,5 @@
-from component import Component
-from angles import *
+from .component import Component
+from .angles import *
 
 
 class Diamond(Component):
@@ -13,7 +13,7 @@ class Diamond(Component):
         Component.__init__(self, (w, w))
 
     def create(self):
-        w = self.w / 2
+        w = self.w // 2
         tr = Angle((w, w), coord=(w, 0), autooutline=False)
         br = Angle((w, w), coord=(w, w), autooutline=False)
         br.transform('clockwise')
@@ -43,7 +43,7 @@ class Circle(Component):
 
     def create(self):
 
-        w = self.w / 2
+        w = self.w // 2
         tr = Angle((w, w), coord=(w, 0), autooutline=False)
         br = Angle((w, w), coord=(w, w), autooutline=False)
         br.transform('clockwise')
@@ -58,5 +58,3 @@ class Circle(Component):
             self.add(component)
 
         self.outline(trim=True)
-
-

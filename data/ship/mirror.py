@@ -1,4 +1,4 @@
-from pixel_map import PixelMap
+from .pixel_map import PixelMap
 
 
 class Mirror(PixelMap):
@@ -45,32 +45,32 @@ class Mirror(PixelMap):
 
         line = self.get_vertical_split()
 
-        rows = range(line+1)
-        columns = range(self.w)
+        rows = list(range(line+1))
+        columns = list(range(self.w))
         self.grab_map(rows, columns, self.ship, line, 'ver')
 
     def run_vertical_b(self):
 
         line = self.get_vertical_split()
 
-        rows = range(line, self.h)
-        columns = range(self.w)
+        rows = list(range(line, self.h))
+        columns = list(range(self.w))
         self.grab_map(rows, columns, self.ship, line, 'ver')
 
     def run_horizontal_a(self):
 
         line = self.get_horizontal_split()
 
-        rows = range(self.h)
-        columns = range(line+1)
+        rows = list(range(self.h))
+        columns = list(range(line+1))
         self.grab_map(rows, columns, self.ship, line, 'hor')
 
     def run_horizontal_b(self):
 
         line = self.get_horizontal_split()
 
-        rows = range(self.h)
-        columns = range(line, self.w)
+        rows = list(range(self.h))
+        columns = list(range(line, self.w))
         self.grab_map(rows, columns, self.ship, line, 'hor')
 
     def run_quad(self):
@@ -80,10 +80,10 @@ class Mirror(PixelMap):
         x_line, y_line = self.get_avg_lines()
 
         quad_arg_dict = {
-            'tl': (range(y_line+1), range(x_line+1)),
-            'tr': (range(y_line+1), range(x_line, self.w)),
-            'bl': (range(y_line, self.h), range(x_line+1)),
-            'br': (range(y_line, self.h), range(x_line, self.w))
+            'tl': (list(range(y_line+1)), list(range(x_line+1))),
+            'tr': (list(range(y_line+1)), list(range(x_line, self.w))),
+            'bl': (list(range(y_line, self.h)), list(range(x_line+1))),
+            'br': (list(range(y_line, self.h)), list(range(x_line, self.w)))
         }
 
         args = quad_arg_dict[tag]
@@ -93,7 +93,7 @@ class Mirror(PixelMap):
         self.grab_map(rows, columns, self.ship, x_line, 'hor')
 
         rows = args[0]
-        columns = range(self.w)
+        columns = list(range(self.w))
         self.grab_map(rows, columns, self, y_line, 'ver')
 
     def grab_map(self, rows, columns, target_map, line, axis):
@@ -153,13 +153,14 @@ class Mirror(PixelMap):
             x_tot += x
             y_tot += y
 
-        x_avg = x_tot / length
-        y_avg = y_tot / length
+        x_avg = x_tot // length
+        y_avg = y_tot // length
 
         return x_avg, y_avg
 
-    def add_vertical_reflected_point(self, (x, y), value, line):
+    def add_vertical_reflected_point(self, xxx_todo_changeme, value, line):
 
+        (x, y) = xxx_todo_changeme
         direction = 'up'
         if y <= line:
             direction = 'down'
@@ -173,8 +174,9 @@ class Mirror(PixelMap):
 
         self.add_point((x, new_y), value)
 
-    def add_horizontal_reflected_point(self, (x, y), value, line):
+    def add_horizontal_reflected_point(self, xxx_todo_changeme1, value, line):
 
+        (x, y) = xxx_todo_changeme1
         direction = 'left'
         if x <= line:
             direction = 'right'
@@ -189,21 +191,21 @@ class Mirror(PixelMap):
         self.add_point((new_x, y), value)
 
     def trim_outliers(self, points):
-        
+
         initial_points = set(points)
         valid_points = set()
 
         for x, y in points:
-            
+
             adj = self.get_adj((x, y), diag=True)
-            
+
             for ax, ay in adj:
                 if self.map[ax][ay] >= 1:
                     valid_points.add((x, y))
                     break
 
         remove_points = list(initial_points.difference(valid_points))
-        
+
         for point in remove_points:
             self.trim_point(point)
 

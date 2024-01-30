@@ -1,8 +1,8 @@
-from constants import *
-from ship.ship import Ship
-from state import State
-from button import Button
-from ship.mirror import Mirror
+from .constants import *
+from .ship.ship import Ship
+from .state import State
+from .button import Button
+from .ship.mirror import Mirror
 import os
 
 
@@ -14,7 +14,7 @@ class Generator(State):
     gridw = 8
     gridh = 6
     gridsize = gridw * gridh
-    grid_list = range(gridsize)
+    grid_list = list(range(gridsize))
 
     @classmethod
     def set_grid_ref(cls):
@@ -24,7 +24,7 @@ class Generator(State):
 
         for key in cls.grid_list:
             x = key % gridw
-            y = (key / gridw)
+            y = (key // gridw)
             grid[key] = (x, y)
 
         return grid
@@ -71,7 +71,7 @@ class Generator(State):
 
         sel = {}
 
-        for point in self.point_ref.keys():
+        for point in list(self.point_ref.keys()):
             sel[point] = False
 
         return sel
@@ -80,7 +80,7 @@ class Generator(State):
 
         saved = {}
 
-        for point in self.point_ref.keys():
+        for point in list(self.point_ref.keys()):
             saved[point] = False
 
         return saved
@@ -89,7 +89,7 @@ class Generator(State):
 
         points = {}
 
-        for x, y in self.grid_ref.values():
+        for x, y in list(self.grid_ref.values()):
             cx = x * SHIPW
             cy = y * SHIPH + BUTTONMARGIN
             points[(x, y)] = (cx, cy)
@@ -108,14 +108,15 @@ class Generator(State):
 
         return ship_grid
 
-    def draw_saved_icon(self, surface, (px, py)):
+    def draw_saved_icon(self, surface, xxx_todo_changeme):
 
+        (px, py) = xxx_todo_changeme
         self.saved_rect.topleft = (px, py)
         surface.blit(self.saved_icon, self.saved_rect)
 
     def draw(self, surface):
 
-        for (x, y), ship in self.ship_grid.items():
+        for (x, y), ship in list(self.ship_grid.items()):
             if ship is None:
                 continue
             point = self.point_ref[(x, y)]
@@ -133,7 +134,7 @@ class Generator(State):
 
     def draw_selection_grid(self, surface):
 
-        for point, state in self.selection_grid.items():
+        for point, state in list(self.selection_grid.items()):
             if not state:
                 continue
             self.selrect.topleft = self.point_ref[point]
@@ -186,11 +187,13 @@ class Generator(State):
 
     def check_grid(self, pos):
 
-        for point in self.grid_ref.values():
+        for point in list(self.grid_ref.values()):
             if self.mouse_over_ship(point, pos):
                 self.toggle_ship(point)
 
-    def mouse_over_ship(self, (x, y), (mx, my)):
+    def mouse_over_ship(self, xxx_todo_changeme1, xxx_todo_changeme2):
+        (x, y) = xxx_todo_changeme1
+        (mx, my) = xxx_todo_changeme2
         cx, cy = self.point_ref[(x, y)]
         return cx < mx < cx + SHIPW and cy < my < cy + SHIPH
 
@@ -212,17 +215,17 @@ class Generator(State):
             self.show_frame = True
 
     def select(self):
-        for point in self.point_ref.keys():
+        for point in list(self.point_ref.keys()):
             if self.ship_grid[point]:
                 self.selection_grid[point] = True
 
     def deselect(self):
-        for point in self.point_ref.keys():
+        for point in list(self.point_ref.keys()):
             self.selection_grid[point] = False
 
     def save(self):
 
-        for point in self.selection_grid.keys():
+        for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
                 filename = '../exports/ship%s.png' % ship.ship_id
@@ -235,7 +238,7 @@ class Generator(State):
 
     def transform(self, method):
 
-        for point in self.selection_grid.keys():
+        for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
                 ship.transform(method)
@@ -255,7 +258,7 @@ class Generator(State):
         self.transform('counter_clockwise')
 
     def mirror(self, mtype, mid):
-        for point in self.selection_grid.keys():
+        for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
                 if ship.mirrored is not None:
@@ -292,7 +295,7 @@ class Generator(State):
         self.mirror('quad_br', 'mirrorbr')
 
     def revert(self):
-        for point in self.selection_grid.keys():
+        for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
                 ship.revert()
@@ -335,7 +338,7 @@ class Generator(State):
         pic = pygame.Surface((SCREENWIDTH, SCREENHEIGHT))
         pic.blit(screen, sr)
 
-        print 'taking screen'
+        print('taking screen')
         pygame.image.save(pic, '../exports/screenshot.png')
 
     def update(self):
@@ -383,7 +386,7 @@ class Generator(State):
 
     def reset_color_palette(self):
 
-        for point in self.selection_grid.keys():
+        for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
                 ship.reset_color_palette()
@@ -391,7 +394,7 @@ class Generator(State):
 
     def toggle_mono(self):
 
-        for point in self.selection_grid.keys():
+        for point in list(self.selection_grid.keys()):
             if self.selection_grid[point]:
                 ship = self.ship_grid[point]
                 ship.toggle_mono_color()

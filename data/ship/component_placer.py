@@ -63,8 +63,8 @@ class ComponentPlacer(object):
         c = self.component
 
         ix, iy = self.ship.frame.point_in_frame()
-        xvar = c.w / 2
-        yvar = c.h / 2
+        xvar = c.w // 2
+        yvar = c.h // 2
         ix += randint(-xvar, xvar)
         iy += randint(-yvar, yvar)
 
@@ -78,8 +78,8 @@ class ComponentPlacer(object):
         c = self.component
 
         ix, iy = choice(tuple(self.ship.edges))
-        xvar = c.w / 2
-        yvar = c.h / 2
+        xvar = c.w // 2
+        yvar = c.h // 2
         ix += randint(-xvar, xvar)
         iy += randint(-yvar, yvar)
 
@@ -169,11 +169,11 @@ class ComponentPlacer(object):
     def move_towards_center(self):
 
         cx, cy = self.current_position
-        if cx >= self.component.w / 2:
+        if cx >= self.component.w // 2:
             dx = -1
         else:
             dx = 1
-        if cy >= self.component.h / 2:
+        if cy >= self.component.h // 2:
             dy = -1
         else:
             dy = 1

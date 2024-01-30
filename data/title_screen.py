@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from state import State
+from .state import State
 from .constants import *
 
 

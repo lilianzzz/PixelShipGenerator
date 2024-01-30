@@ -4,15 +4,16 @@ from ..pixel_map import PixelMap
 
 
 class Component(PixelMap):
-    
+
     """ This is the base class for a ship
     component. It should not be directly created.
     Create() must be overwritten by subclass. This
     sets the initial value of the map
     """
 
-    def __init__(self, (w, h), coord=(0, 0), autocreate=True, autooutline=True):
+    def __init__(self, xxx_todo_changeme, coord=(0, 0), autocreate=True, autooutline=True):
 
+        (w, h) = xxx_todo_changeme
         self.x, self.y = coord
         self.color_code = None
 
@@ -33,8 +34,9 @@ class Component(PixelMap):
                 if self.map[x][y] >= 1:
                     self.map[x][y] = self.color_code
 
-    def add_pixel(self, (x, y), value=1):
+    def add_pixel(self, xxx_todo_changeme1, value=1):
 
+        (x, y) = xxx_todo_changeme1
         self.map[x][y] = value
         self.points.add((x, y))
 
@@ -42,7 +44,7 @@ class Component(PixelMap):
         pass
 
     def outline(self, trim=False):
-    
+
         outline = set()
         for x, y in self.points:
 
@@ -55,7 +57,7 @@ class Component(PixelMap):
                 if self.map[ax][ay] == 0:
                     outline.add((x, y))
                     break
-                    
+
         for px, py in outline:
             self.add_edge((px, py))
 
@@ -99,7 +101,7 @@ class Component(PixelMap):
 
         for tx, ty in trim:
             self.trim_point((tx, ty))
-       
+
     ##################################################################
     # realized this floodfill to outline was needlessly complicated
     # and would also fail to outline internal details
@@ -131,7 +133,7 @@ class Component(PixelMap):
                 if p not in seen:
                     edge.add(p)
         return edge
-        
+
     def get_edge_set(self):
 
         edge = set()
@@ -177,8 +179,9 @@ class Component(PixelMap):
                 if c_value != 0:
                     self.add_pixel((mx, my), value=c_value)
 
-    def move(self, (x, y)):
+    def move(self, xxx_todo_changeme2):
 
+        (x, y) = xxx_todo_changeme2
         self.x = x
         self.y = y
 

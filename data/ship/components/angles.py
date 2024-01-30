@@ -1,4 +1,4 @@
-from component import Component
+from .component import Component
 from random import *
 
 
@@ -70,8 +70,9 @@ class Angle(Component):
     # not a working component - base class for 45 degree
     # angle components
 
-    def __init__(self, (w, h), coord=(0, 0), b=0, autooutline=True):
+    def __init__(self, xxx_todo_changeme, coord=(0, 0), b=0, autooutline=True):
 
+        (w, h) = xxx_todo_changeme
         self.m = float(h) / w
         self.b = b
 

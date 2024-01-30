@@ -2,11 +2,11 @@
 
 import sys
 import pygame
-import pygame._view
+# import pygame._view
 from data.main import main
-        
-        
-if __name__ == '__main__': 
+
+
+if __name__ == '__main__':
 
     main()
     pygame.quit()

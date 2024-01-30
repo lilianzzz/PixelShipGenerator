@@ -1,4 +1,4 @@
-from pixel_map import PixelMap
+from .pixel_map import PixelMap
 from ..constants import *
 from random import choice
 
@@ -41,7 +41,8 @@ class ScanOutline(PixelMap):
         for x, y in edge:
             self.trim_point((x, y))
 
-    def position(self, (x, y)):
+    def position(self, xxx_todo_changeme):
+        (x, y) = xxx_todo_changeme
         self.rect.topleft = (x-scale(2), y-scale(2))
 
     def flood_find_outer_edge(self):

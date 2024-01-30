@@ -23,6 +23,7 @@ class Button(object):
 
         self.function()
 
-    def mouse_over(self, (x, y)):
+    def mouse_over(self, xxx_todo_changeme):
 
+        (x, y) = xxx_todo_changeme
         return self.x < x < self.x + self.w and self.y < y < self.y + self.h
